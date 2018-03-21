@@ -2,12 +2,12 @@
 
 angular
   .module('monacoEditor')
-  .directive('monacoEditor', function () {
+  .directive('monacoEditor', function ($interval) {
 
     function link(scope, element, attrs) {
       var editorElement = element[0];
       require(['vs/editor/editor.main'], function () {
-        var editor = monaco.editor.create(editorElement, {
+        var editor = window.monaco.editor.create(editorElement, {
           value: scope.code,
           language: scope.language
         });
@@ -20,9 +20,8 @@ angular
         // }
         function updateScope() {
           scope.code = editor.getValue();
-          scope.$apply();
         };
-        setInterval(updateScope, 1000); // TODO - need to clear the interval when the directive is torn down
+        $interval(updateScope, 1000); // TODO - need to clear the interval when the directive is torn down
       });
     }
 
