@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en" ng-app="codeeditorApp">
+
+<head>
+  <meta charset="utf-8">
+  <title>Angular + Monaco Editor example</title>
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="app.css" />
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="app.module.js"></script>
+  <script src="monaco-editor/monaco-editor.module.js"></script>
+  <script src="monaco-editor/monaco-editor.directive.js"></script>
+
+  <!-- TODO - currently need to manually copy from the monaco-editor folder from node_modules to the app/libs folder -->
+  <script src="/libs/monaco-editor/min/vs/loader.js"></script>
+  <script>
+    require.config({ paths: { 'vs': '/libs/monaco-editor/min/vs' } });
+  </script>
+
+</head>
+
+<body>
+  <div ng-controller="CodeController">
+    <h1>Sample page - {{filename}}</h1>
+    <div monaco-editor code="code" language="language" style="width:800px;height:600px;border:1px solid grey"></div>
+
+    <h1>Simple textarea to show binding:</h1>
+    <textarea name="" id="" cols="30" rows="10" ng-model="code"></textarea>
+
+  </div>
+</body>
+
+</html>
