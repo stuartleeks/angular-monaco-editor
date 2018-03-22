@@ -6,6 +6,10 @@ var codeeditorApp = angular.module('codeeditorApp', [
 
 
 codeeditorApp.controller('CodeController', function ($scope) {
+
+  $scope.themes = ['vs-dark', 'vs', 'hc-black'];
+  $scope.selectedTheme = $scope.themes[0];
+  
   $scope.codeFiles = [
     {
       'filename': 'sample-file.js',

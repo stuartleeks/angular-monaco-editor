@@ -23,12 +23,16 @@
   <div ng-controller="CodeController">
     <h1>Sample page with monaco-editor</h1>
     <div>
-      Select code file: 
+      Code file:
       <select ng-model="selectedCodeFile" ng-options="codeFile.filename for codeFile in codeFiles"></select>
+    </div>
+    <div>
+      Theme:
+      <select ng-model="selectedTheme" ng-options="theme for theme in themes"></select>
     </div>
 
     <h2>Currently editing - {{selectedCodeFile.filename}}</h2>
-    <div monaco-editor code-file="selectedCodeFile" style="width:800px;height:600px;border:1px solid grey"></div>
+    <div monaco-editor code-file="selectedCodeFile" editor-theme="selectedTheme" style="width:800px;height:600px;border:1px solid grey"></div>
 
     <h1>Simple textarea to show binding:</h1>
     <textarea name="" id="" cols="30" rows="10" ng-model="selectedCodeFile.code"></textarea>
