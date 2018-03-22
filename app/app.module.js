@@ -5,15 +5,18 @@ var codeeditorApp = angular.module('codeeditorApp', [
 ]);
 
 
-codeeditorApp.controller('CodeController', function($scope){
-  // $scope.filename = 'sample-file.js';
-  // $scope.code = ['function x() {',
-  // '\tconsole.log("Hello world - this is monaco!");',
-  // '}'].join('\n');
-  // $scope.language = 'javascript';
-
-  $scope.filename = 'sample-file.cs';
-  $scope.code =  `using System;
+codeeditorApp.controller('CodeController', function ($scope) {
+  $scope.codeFiles = [
+    {
+      'filename': 'sample-file.js',
+      'code': ['function x() {',
+        '\tconsole.log("Hello world - this is monaco!");',
+        '}'].join('\n'),
+      'language': 'javascript'
+    },
+    {
+      'filename': 'sample-file.cs',
+      'code': `using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -35,8 +38,25 @@ namespace VS
 \t\t\tProcess.Start(si);
 \t\t}
 \t}
-}`
-  $scope.language = 'csharp';
+}`,
+      'language': 'csharp'
+    },
+    {
+      'filename': 'sample.go',
+      'code': `// You can edit this code!
+// Click here and start typing.
+package main
 
+import "fmt"
+
+func main() {
+\tfmt.Println("Hello, 世界")
+}`,
+      'language': 'go',
+      'useSpaces': false
+    }
+  ];
+
+  $scope.selectedCodeFile = $scope.codeFiles[2];
 
 })
