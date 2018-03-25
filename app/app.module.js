@@ -9,7 +9,7 @@ codeeditorApp.controller('CodeController', function ($scope) {
 
   $scope.themes = ['vs-dark', 'vs', 'hc-black'];
   $scope.selectedTheme = $scope.themes[0];
-  
+
   $scope.codeFiles = [
     {
       'filename': 'sample-file.js',
@@ -58,7 +58,14 @@ func main() {
 }`,
       'language': 'go',
       'useSpaces': false
-    }
+    },
+            {
+                'filename': 'sample.py',
+                'language': 'python',
+                'code': `def hello():
+\tprint("Hello World") 
+\treturn `,
+            }
   ];
 
   $scope.selectedCodeFile = $scope.codeFiles[2];

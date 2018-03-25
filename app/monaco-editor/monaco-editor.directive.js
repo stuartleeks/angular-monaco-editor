@@ -24,25 +24,24 @@ angular
           },
           updateScope: function updateScope() {
             this.scope.codeFile.code = this.editor.getValue();
+          },
+          onCodeFileChanged: function onCodeFileChanged(newValue, oldValue, scope) {
+            console.log("codeFile changed");
+
+            // update the language model (and set `insertSpaces`)
+            var newModel = monaco.editor.createModel('', newValue.language);
+            newModel.updateOptions({ insertSpaces: this.getValueOrDefault(newValue.useSpaces, true) });
+            this.editor.setModel(newModel);
+
+            // update the code
+            this.editor.setValue(newValue.code);
           }
         };
-
         editorContext.editor = window.monaco.editor.create(editorElement, {
           value: scope.codeFile.code,
           language: scope.codeFile.language,
           theme: editorContext.getValueOrDefault(scope.editorTheme, 'vs-dark')
         });
-        editorContext.onCodeFileChanged = function onCodeFileChanged(newValue, oldValue, scope) {
-          console.log("codeFile changed");
-
-          // update the language model (and set `insertSpaces`)
-          var newModel = monaco.editor.createModel('', newValue.language);
-          newModel.updateOptions({ insertSpaces: this.getValueOrDefault(newValue.useSpaces, true) });
-          this.editor.setModel(newModel);
-
-          // update the code
-          this.editor.setValue(newValue.code);
-        };
 
         // TODO - look up api docs to find a suitable event to handle as the onDidChangeModelContent event only seems to fire for certain changes!
         // As a fallback, currently updating scope on a timer...

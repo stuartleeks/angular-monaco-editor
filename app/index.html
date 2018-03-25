@@ -15,6 +15,21 @@
   <script src="/libs/monaco-editor/min/vs/loader.js"></script>
   <script>
     require.config({ paths: { 'vs': '/libs/monaco-editor/min/vs' } });
+    require(['vs/editor/editor.main'], function () {
+      monaco.languages.registerCompletionItemProvider('python', {
+        provideCompletionItems: () => {
+          return [
+            {
+              label: 'def',
+              kind: monaco.languages.CompletionItemKind.Keyword,
+              insertText: {
+                value: 'def ${1:name}():\r\t$0'
+              }
+            }
+          ]
+        }
+      })
+    });
   </script>
 
 </head>
